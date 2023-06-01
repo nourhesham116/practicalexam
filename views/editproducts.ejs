@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admindashboard.css">
+    <link rel="stylesheet" href="/css/productcontrol.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Edit Products</title>
+</head>
+
+<body>
+
+   
+    <section id="interface">
+        <div class="navigation">
+            <div class="n1">
+                <div><i id="menu-btn" class="fa fa-bars"></i>
+                </div>
+                <div class="search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+           
+        </div>
+        <h2 class="i-name">
+            Products control
+        </h2>
+
+            <div id="newproductdetails" >
+                <form action='/editproducts/<%=product._id%>' method='post' enctype="multipart/form-data">
+                    <label for="fname">Product name:</label>
+                    <input type="text" placeholder="enter the name of the product" size="50" value="<%=product.name%>" name="name"  required></input>
+                    <br>
+                    <br>
+                    <label for="fname">Product price:</label>
+                    <input id="priceInput" type="text" placeholder="enter the price of the product" value="<%=product.price%>" size="51"name="price" required></input>
+                    <p id="priceError" class="error-message"></p>
+                    <br>
+                    <br>
+                    <label for="fname">Product description:</label>
+                    <input type="text" placeholder="enter the description of the product"value="<%=product.description%>"size="45" name="description" required ></input>
+                    <br>
+                    <br>
+                  
+                        <input type="submit" name="submit" value="Edit product">
+                        <% if (typeof successMessage !== 'undefined') { %>
+                            <div class="success-box">
+                              <%= successMessage %>
+                            </div>
+                        </div>
+                            <% } %>
+                </form>
+                
+            </div>
+
+           <script src="/javascript/productcontrol.js"></script>
+           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+           <script>
+             $(document).ready(function() {
+               $('#priceInput').on('input', function() {
+                 var price = $(this).val();
+                 var isValidPrice = /^\d+(\.\d{1,2})?$/.test(price);
+                 if (!isValidPrice) {
+                   $('#priceError').text('Invalid price. Please enter a valid number.');
+                 } else {
+                   $('#priceError').text('');
+                 }
+               });
+           
+               $('#productForm').submit(function(event) {
+                 var price = $('#priceInput').val();
+                 var isValidPrice = /^\d+(\.\d{1,2})?$/.test(price);
+                 if (!isValidPrice) {
+                   event.preventDefault();
+                   $('#priceError').text('Invalid price. Please enter a valid number.');
+                 }
+               });
+             });
+           </script>
+</body>
+
+</html>

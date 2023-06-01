@@ -1,0 +1,55 @@
+<html>
+  <a href="index">HOME</a>  
+<div id="newproductdetails">
+    <form id="productForm" action="/addproducts-action" method="post" enctype="multipart/form-data">
+      <label for="fname">Product name:</label>
+      <input type="text" placeholder="enter the name of the product" size="50" name="name" required>
+      <br><br>
+      <label for="fname">Product price:</label>
+      <input id="priceInput" type="text" placeholder="enter the price of the product" size="51" name="price" required>
+      <p id="priceError" class="error-message"></p>
+      <br><br>
+      <label for="fname">Product description:</label>
+      <input type="text" placeholder="enter the description of the product" size="45" name="description" required>
+      <br><br>
+      <!---->
+     
+      <label for="image1">Main image:</label>
+      <input type="file" name="image1" accept="image/*" required>
+      
+      <input type="submit" name="submit" value="add product">
+      <% if (typeof successMessage !== 'undefined') { %>
+      <div class="success-box">
+        <%= successMessage %>
+      </div>
+      <% } %>
+    </form>
+  </div>
+
+<script src="../javascript/productcontrol.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+$('#priceInput').on('input', function() {
+var price = $(this).val();
+var isValidPrice = /^\d+(\.\d{1,2})?$/.test(price);
+if (!isValidPrice) {
+$('#priceError').text('Invalid price. Please enter a valid number.');
+} else {
+$('#priceError').text('');
+}
+});
+
+$('#productForm').submit(function(event) {
+var price = $('#priceInput').val();
+var isValidPrice = /^\d+(\.\d{1,2})?$/.test(price);
+if (!isValidPrice) {
+event.preventDefault();
+$('#priceError').text('Invalid price. Please enter a valid number.');
+}
+});
+});
+</script>
+</body>
+
+</html>

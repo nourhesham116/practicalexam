@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/RegisterationForm.css">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+    <title>Register</title>
+</head>
+<body>
+    <a href="index">HOME</a>  
+    <div class="createAndBenefits">
+        <div class="regForm">
+   <div class="alert">
+            <% if(typeof alert != 'undefined'){ %>
+                <% alert.forEach(function(error){%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <%= error.msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <% }) %>
+                      <% } %>
+                    </div>
+            <form action='/RegisterationForm-action' method='post' onsubmit=return validate(this)>
+                <h2>Create Account</h2>
+                <p>Save your shipping information for faster checkout.
+                     Opt-in for our email list to receive early access to new products & exclusive offers.</p> 
+                 <div>
+                    <input type="text" name="Firstname" placeholder="First Name"required>
+
+
+                    <input type="text" name="Lastname" placeholder="Last Name"required>
+                    
+                 </div> 
+                 <div class="err"><span id="FnameERR"></span> <span id="LnameERR"></span></div>
+                 <input type="email" name="email" placeholder="Email Address"required> 
+
+               
+                 <% if (typeof emailError !== 'undefined' && emailError && emailError !== 'An error occurred') { %>
+                    <div class="alert alert-danger" role="alert" style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px; margin-bottom: 10px; border-radius: 3px; font-size: 14px;">
+                      <%= emailError %>
+                    </div>
+                  <% } %>
+
+
+                <span id="eErr" class="err"></span>
+                 <!-- <input type="email" name="emailConfirm" placeholder="Confirm Email Address"> -->
+                 <span id="ecErr" class="err"></span>
+                
+                 <input type="password" name="password" placeholder="Password" required>
+
+                      
+                 <span id="pErr" class="err">
+                  
+                    
+                 </span>
+                <!-- <input type="password" name="passwordConfirm" placeholder="Confirm Password">-->
+                 
+                  <input type="hidden" name="type" value="client">
+                  <input type="submit" name="submit" value="Create Account">
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>

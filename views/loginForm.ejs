@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="index">HOME</a>  
+    <form action="/login-action" method="post">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="<%= typeof email !== 'undefined' ? email : '' %>">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="<%= typeof password !== 'undefined' ? password : '' %>">
+        </div>
+      
+        <% if (typeof error !== 'undefined' && error && error !== 'An error occurred') { %>
+          <div class="alert alert-danger" role="alert" style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px; margin-bottom: 10px; border-radius: 3px; font-size: 14px;">
+            <%= error %>
+          </div>
+        <% } %>
+      
+        <input type="submit" name="submit" value="SIGN-IN" >
+      </form>
+</body>
+</html>
